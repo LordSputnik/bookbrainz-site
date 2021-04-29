@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>client/entity-editor/alias-editor/actions.js - Documentation</title>
+    <title>server/helpers/mailer.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">client/entity-editor/alias-editor/actions.js</h1>
+    <h1 class="page-title">server/helpers/mailer.js</h1>
     
 
     
@@ -41,21 +41,19 @@
         <article>
             <pre class="prettyprint source linenums"><code>"use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.debouncedUpdateAliasName = debouncedUpdateAliasName;
-exports.debouncedUpdateAliasSortName = debouncedUpdateAliasSortName;
-exports.updateAliasLanguage = updateAliasLanguage;
-exports.updateAliasPrimary = updateAliasPrimary;
-exports.addAliasRow = addAliasRow;
-exports.removeAliasRow = removeAliasRow;
-exports.hideAliasEditor = hideAliasEditor;
-exports.removeEmptyAliases = removeEmptyAliases;
-exports.REMOVE_EMPTY_ALIASES = exports.HIDE_ALIAS_EDITOR = exports.REMOVE_ALIAS_ROW = exports.UPDATE_ALIAS_PRIMARY = exports.UPDATE_ALIAS_LANGUAGE = exports.ADD_ALIAS_ROW = exports.UPDATE_ALIAS_SORT_NAME = exports.UPDATE_ALIAS_NAME = void 0;
+exports.default = void 0;
+
+var _config = _interopRequireDefault(require("../../common/helpers/config.js"));
+
+var _nodemailer = _interopRequireDefault(require("nodemailer"));
 
 /*
- * Copyright (C) 2016  Ben Ockmore
+ * Copyright (C) 2021  Divyanshu Raj
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,169 +69,58 @@ exports.REMOVE_EMPTY_ALIASES = exports.HIDE_ALIAS_EDITOR = exports.REMOVE_ALIAS_
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-var UPDATE_ALIAS_NAME = 'UPDATE_ALIAS_NAME';
-exports.UPDATE_ALIAS_NAME = UPDATE_ALIAS_NAME;
-var UPDATE_ALIAS_SORT_NAME = 'UPDATE_ALIAS_SORT_NAME';
-exports.UPDATE_ALIAS_SORT_NAME = UPDATE_ALIAS_SORT_NAME;
-var ADD_ALIAS_ROW = 'ADD_ALIAS_ROW';
-exports.ADD_ALIAS_ROW = ADD_ALIAS_ROW;
-var UPDATE_ALIAS_LANGUAGE = 'UPDATE_ALIAS_LANGUAGE';
-exports.UPDATE_ALIAS_LANGUAGE = UPDATE_ALIAS_LANGUAGE;
-var UPDATE_ALIAS_PRIMARY = 'UPDATE_ALIAS_PRIMARY';
-exports.UPDATE_ALIAS_PRIMARY = UPDATE_ALIAS_PRIMARY;
-var REMOVE_ALIAS_ROW = 'REMOVE_ALIAS_ROW';
-exports.REMOVE_ALIAS_ROW = REMOVE_ALIAS_ROW;
-var HIDE_ALIAS_EDITOR = 'HIDE_ALIAS_EDITOR';
-exports.HIDE_ALIAS_EDITOR = HIDE_ALIAS_EDITOR;
-var REMOVE_EMPTY_ALIASES = 'REMOVE_EMPTY_ALIASES';
-exports.REMOVE_EMPTY_ALIASES = REMOVE_EMPTY_ALIASES;
-
+var mailConfig = _config.default.mailConfig;
 /**
- * Produces an action indicating that the name for a particular alias within
- * the editor should be updated with the provided value. The action is
- * marked to be debounced by the keystroke debouncer defined for
- * redux-debounce.
+ * This is a dedicated mailing interface for bookbrainz mailing services.
  *
- * @param {number} rowId - The ID of the row in the alias editor to update.
- * @param {string} value - The new value to be used for the alias name.
- * @returns {Action} The resulting UPDATE_ALIAS_NAME action.
- */
-function debouncedUpdateAliasName(rowId, value) {
-  return {
-    meta: {
-      debounce: 'keystroke'
-    },
-    payload: {
-      rowId: rowId,
-      value: value
-    },
-    type: UPDATE_ALIAS_NAME
-  };
-}
-/**
- * Produces an action indicating that the sort name for a particular alias
- * within the editor should be updated with the provided value. The action is
- * marked to be debounced by the keystroke debouncer defined for
- * redux-debounce.
+ * @param {string} from - Email address of sender
+ * @param {string} to - Email address of receiver
+ * @param {string} subject- Subject of the E-mail
+ * @param {string} html - Body of E-mail in form of HTML
+ * @returns {Promise&lt;object>} Returns a promise that resolves with an error object if message failed or an info object if the message succeeded (see https://nodemailer.com/usage/ for more details)
+ * If entity is found successfully in the database this function set the entity data
+ * at res.locals.entity and return to next function.
+ * @example
+ * Promise way :
  *
- * @param {number} rowId - The ID of the row in the alias editor to update.
- * @param {string} value - The new value to be used for the alias sort name.
- * @returns {Action} The resulting UPDATE_ALIAS_SORT_NAME action.
+ * sendEmail("abc@gmail.com", "def@gmail.com", "Revision added to Entity", "some html string")
+ * .then((response)=>{
+ *  // the response object contains details of a successful response (see https://nodemailer.com/usage)
+ * 	  console.log("Email has been sent successfully")
+ * 	 })
+ * .catch((error)=>{
+ * 	  //handle error
+ * 	})
+ *
+ * Async/Await way :
+ *
+ *  try{
+ * 		const response = await sendEmail("abc@gmail.com", "def@gmail.com", "Revision added to Entity", "some html string")
+ * 		console.log("Email has been sent successfully")
+ *   }
+ * 	catch (error) {
+ * 		//handle the error
+ * 	}
+ * @description
+ * This helper function  sends E-mail with attributes collected from argument in given order.
+ * It uses nodemailer's transporter to send the E-mail under the hood.
+ * It returns a promise that should be handled using .then()/.catch() or async/await syntax wrapped in a try…catch block.
  */
 
-
-function debouncedUpdateAliasSortName(rowId, value) {
-  return {
-    meta: {
-      debounce: 'keystroke'
-    },
-    payload: {
-      rowId: rowId,
-      value: value
-    },
-    type: UPDATE_ALIAS_SORT_NAME
-  };
-}
-/**
- * Produces an action indicating that the language for a particular alias
- * within the editor should be updated with the provided value.
- *
- * @param {number} rowId - The ID of the row in the alias editor to update.
- * @param {number} value - The new value to be used for the alias language ID.
- * @returns {Action} The resulting UPDATE_ALIAS_LANGUAGE action.
- */
+function sendEmail(from, to, subject, html) {
+  var transporter = _nodemailer.default.createTransport(mailConfig); // returns a promise
 
 
-function updateAliasLanguage(rowId, value) {
-  return {
-    payload: {
-      rowId: rowId,
-      value: value
-    },
-    type: UPDATE_ALIAS_LANGUAGE
-  };
-}
-/**
- * Produces an action indicating that the primary flag for a particular alias
- * within the editor should be updated with the provided value.
- *
- * @param {number} rowId - The ID of the row in the alias editor to update.
- * @param {boolean} value - The new value to be used for the alias primary flag.
- * @returns {Action} The resulting UPDATE_ALIAS_PRIMARY action.
- */
-
-
-function updateAliasPrimary(rowId, value) {
-  return {
-    payload: {
-      rowId: rowId,
-      value: value
-    },
-    type: UPDATE_ALIAS_PRIMARY
-  };
+  return transporter.sendMail({
+    from: from,
+    html: html,
+    subject: subject,
+    to: to
+  });
 }
 
-var nextAliasRowId = 0;
-/**
- * Produces an action indicating that a row for a new alias should be added
- * to the alias editor. The row is assigned an ID based on an incrementing
- * variable existing on the client.
- *
- * @returns {Action} The resulting ADD_ALIAS_ROW action.
- */
-
-function addAliasRow() {
-  /*
-   * Prepend 'n' here to indicate new alias, and avoid conflicts with IDs of
-   * existing aliases.
-   */
-  return {
-    payload: "n".concat(nextAliasRowId++),
-    type: ADD_ALIAS_ROW
-  };
-}
-/**
- * Produces an action indicating that the row with the provided ID should be
- * removed from the alias editor.
- *
- * @param {number} rowId - The ID for the row to be deleted.
- * @returns {Action} The resulting REMOVE_ALIAS_ROW action.
- */
-
-
-function removeAliasRow(rowId) {
-  return {
-    payload: rowId,
-    type: REMOVE_ALIAS_ROW
-  };
-}
-/**
- * Produces an action indicating that the alias editor should be hidden from
- * view.
- *
- * @see showAliasEditor
- *
- * @returns {Action} The resulting HIDE_ALIAS_EDITOR action.
- */
-
-
-function hideAliasEditor() {
-  return {
-    type: HIDE_ALIAS_EDITOR
-  };
-}
-/**
- * Produces an action indicating that the empty rows should be deleted.
- *
- * @returns {Action} The resulting REMOVE_EMPTY_ALIASES action.
- */
-
-
-function removeEmptyAliases() {
-  return {
-    type: REMOVE_EMPTY_ALIASES
-  };
-}</code></pre>
+var _default = sendEmail;
+exports.default = _default;</code></pre>
         </article>
     </section>
 
