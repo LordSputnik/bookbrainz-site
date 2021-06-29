@@ -97,7 +97,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AliasRowMerge);
 <Col sm={3}>
 	<Button
 		bsSize="sm"
-		bsStyle="danger"
+		variant="danger"
 		onClick={onRemoveButtonClick}
 	>
 		Remove

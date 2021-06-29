@@ -304,12 +304,12 @@ class RelationshipModal
 		const link = targetEntity ? getEntityLink({bbid: targetEntity.id, type: targetEntity.type}) : '';
 		const openButton = (
 			<Button
-				bsStyle="info"
 				disabled={!targetEntity}
 				href={link}
 				rel="noreferrer noopener"
 				target="_blank"
 				title="Open in a new tab"
+				variant="info"
 			>
 				<FontAwesomeIcon icon={faExternalLinkAlt}/>
 			</Button>
@@ -389,7 +389,7 @@ class RelationshipModal
 						</p>
 					</Modal.Body>
 					<Modal.Footer>
-						<Button bsStyle="danger" onClick={onCancel}>Cancel</Button>
+						<Button variant="danger" onClick={onCancel}>Cancel</Button>
 					</Modal.Footer>
 				</Modal>
 			);
@@ -429,18 +429,18 @@ class RelationshipModal
 					<Row>
 						<Col md={10} mdOffset={1}>
 							<ProgressBar
-								bsStyle="success"
 								now={this.calculateProgressAmount()}
+								variant="success"
 							/>
 						</Col>
 					</Row>
-					<Button bsStyle="danger" onClick={onCancel}>
+					<Button variant="danger" onClick={onCancel}>
 						<FontAwesomeIcon icon={faTimes}/>
 						<span>&nbsp;Cancel</span>
 					</Button>
 					<Button
-						bsStyle="success"
 						disabled={submitDisabled}
+						variant="success"
 						onClick={this.handleAdd}
 					>
 						<FontAwesomeIcon icon={faPlus}/>

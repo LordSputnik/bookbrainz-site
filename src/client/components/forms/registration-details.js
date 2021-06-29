@@ -87,7 +87,7 @@ class RegistrationForm extends React.Component {
 		let errorComponent = null;
 		if (this.state.error) {
 			errorComponent =
-				<Alert bsStyle="danger">{this.state.error}</Alert>;
+				<Alert variant="danger">{this.state.error}</Alert>;
 		}
 
 		const loadingComponent = this.state.waiting ? <LoadingSpinner/> : null;
@@ -151,9 +151,9 @@ class RegistrationForm extends React.Component {
 							<div className="text-center">
 								<Button
 									bsSize="large"
-									bsStyle="primary"
 									disabled={!this.state.valid}
 									type="submit"
+									variant="primary"
 								>
 									Looks good, sign me up!
 								</Button>

@@ -234,8 +234,8 @@ function EditionSection({
 				/>
 				<Button
 					block
-					bsStyle="primary"
 					className="wrap"
+					variant="primary"
 					// eslint-disable-next-line react/jsx-no-bind
 					onClick={onToggleShowEditionGroupSection.bind(this, false)}
 				>
@@ -258,13 +258,13 @@ function EditionSection({
 				{
 					showAutoCreateEditionGroupMessage ?
 						<Col md={6} mdOffset={showMatchingEditionGroups ? 0 : 3}>
-							<Alert bsStyle="success">
+							<Alert variant="success">
 								<p>A new Edition Group with the same name will be created automatically.</p>
 								<br/>
 								<Button
 									block
-									bsStyle="success"
 									className="wrap"
+									variant="success"
 									// eslint-disable-next-line react/jsx-no-bind
 									onClick={onToggleShowEditionGroupSection.bind(this, true)}
 								>
@@ -276,7 +276,7 @@ function EditionSection({
 				}
 				{showMatchingEditionGroups &&
 					<Col md={6}>
-						<Alert bsStyle="warning">
+						<Alert variant="warning">
 							{matchingNameEditionGroups.length > 1 ?
 								'Edition Groups with the same name as this Edition already exist' :
 								'An existing Edition Group with the same name as this Edition already exists'
@@ -419,7 +419,7 @@ function EditionSection({
 				<Row>
 					<Col className="text-center" md={4} mdOffset={4}>
 						<Button
-							bsStyle="link"
+							variant="link"
 							onClick={onPhysicalButtonClick}
 						>
 							Add physical data…

@@ -89,7 +89,7 @@ class EntityDeletionForm extends React.Component {
 		let errorComponent = null;
 		if (this.state.error) {
 			errorComponent =
-				<Alert bsStyle="danger">{this.state.error}</Alert>;
+				<Alert variant="danger">{this.state.error}</Alert>;
 		}
 
 		const loadingComponent = this.state.waiting ? <LoadingSpinner/> : null;
@@ -98,10 +98,10 @@ class EntityDeletionForm extends React.Component {
 		const footerComponent = (
 			<span className="clearfix">
 				<Button
-					bsStyle="danger"
 					className="pull-right"
 					disabled={!hasNote}
 					type="submit"
+					variant="danger"
 				>
 					<FontAwesomeIcon icon={faTrashAlt}/> Delete
 				</Button>
@@ -131,7 +131,7 @@ class EntityDeletionForm extends React.Component {
 					<Col md={6} mdOffset={3}>
 						<form onSubmit={this.handleSubmit}>
 							<Panel
-								bsStyle="danger"
+								variant="danger"
 							>
 								<Panel.Heading>
 									<Panel.Title componentClass="h3">
@@ -140,7 +140,7 @@ class EntityDeletionForm extends React.Component {
 								</Panel.Heading>
 								<Panel.Body>
 
-									<Alert bsStyle="warning">
+									<Alert variant="warning">
 										<h4>
 											<FontAwesomeIcon icon={faExclamationTriangle}/>&nbsp;
 											You’re about to delete the {entity.type} {entityName}.

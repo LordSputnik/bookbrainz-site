@@ -263,8 +263,8 @@ class SearchResults extends React.Component {
 				{
 					this.state.message.text ?
 						<Alert
-							bsStyle={this.state.message.type}
 							className="margin-top-1"
+							variant={this.state.message.type}
 							onDismiss={this.handleAlertDismiss}
 						>
 							{this.state.message.text}
@@ -275,18 +275,18 @@ class SearchResults extends React.Component {
 					this.props.user ?
 						<ButtonGroup>
 							<Button
-								bsStyle="primary"
 								disabled={!this.state.selected.length}
 								type="button"
+								variant="primary"
 								onClick={this.handleAddToCollection}
 							>
 								{genEntityIconHTMLElement('Collection')}
 									Add to Collection
 							</Button>
 							<Button
-								bsStyle="warning"
 								disabled={!this.state.selected.length}
 								type="button"
+								variant="warning"
 								onClick={this.handleClearSelected}
 							>
 								Clear <Badge>{this.state.selected.length}</Badge> selected

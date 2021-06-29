@@ -21,9 +21,10 @@ import {
 	extractLayoutProps
 } from '../helpers/props';
 
+
 import AboutPage from '../../client/components/pages/about';
 import {AppContainer} from 'react-hot-loader';
-import ContributePage from '../../client/components/pages/contribute';
+// import ContributePage from '../../client/components/pages/contribute';
 import DevelopPage from '../../client/components/pages/develop';
 import HelpPage from '../../client/components/pages/help';
 import Index from '../components/pages/index';
@@ -42,7 +43,7 @@ const page = propsTarget ? pageTarget.innerHTML : '';
 
 const pageMap = {
 	About: AboutPage,
-	Contribute: ContributePage,
+	// Contribute: ContributePage,
 	Develop: DevelopPage,
 	Help: HelpPage,
 	Index,

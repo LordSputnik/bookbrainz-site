@@ -125,7 +125,7 @@ class AddEntityToCollectionModal extends React.Component {
 			errorComponent =
 				(
 					<div className="text-center margin-top-1">
-						<Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>{this.state.error}</Alert>
+						<Alert variant="danger" onDismiss={this.handleAlertDismiss}>{this.state.error}</Alert>
 					</div>
 				);
 		}
@@ -146,8 +146,8 @@ class AddEntityToCollectionModal extends React.Component {
 								const buttonAfter = (
 									<Button
 										bsSize="small"
-										bsStyle="danger"
 										type="button"
+										variant="danger"
 										onClick={() => this.handleRemoveEntity(index)}
 									>
 										<FontAwesomeIcon icon={faTimes}/>&nbsp;Remove
@@ -191,16 +191,16 @@ class AddEntityToCollectionModal extends React.Component {
 				<Modal.Footer>
 					<ButtonGroup>
 						<Button
-							bsStyle="primary"
 							type="button"
+							variant="primary"
 							onClick={this.handleAddEntity}
 						>
 							<FontAwesomeIcon icon={faPlus}/>
 							&nbsp;Add another {lowerCase(this.props.collectionType)}
 						</Button>
 						<Button
-							bsStyle="success"
 							disabled={!cleanedEntities.length}
+							variant="success"
 							onClick={this.handleSubmit}
 						>
 							<FontAwesomeIcon icon={faPlus}/>

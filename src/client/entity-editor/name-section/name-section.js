@@ -176,7 +176,7 @@ class NameSection extends React.Component {
 							warnIfExists,
 							disambiguationDefaultValue
 						) ?
-							<Alert bsStyle="warning">
+							<Alert variant="warning">
 									We found the following&nbsp;
 								{_.startCase(entityType)}{exactMatches.length > 1 ? 's' : ''} with
 									exactly the same name or alias:
@@ -185,10 +185,10 @@ class NameSection extends React.Component {
 									{exactMatches.map((match) =>
 										(
 											<ListGroupItem
-												bsStyle="warning"
 												href={`/${_.kebabCase(entityType)}/${match.bbid}`}
 												key={`${match.bbid}`}
-												rel="noopener noreferrer" target="_blank"
+												rel="noopener noreferrer"
+												target="_blank" variant="warning"
 											>
 												{match.defaultAlias.name} {getEntityDisambiguation(match)}
 											</ListGroupItem>

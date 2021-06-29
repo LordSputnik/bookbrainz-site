@@ -110,9 +110,9 @@ function WorkTable({entity, showAddedAtColumn, works, showAdd, showCheckboxes, s
 				</Table>
 				{showAdd &&
 					<Button
-						bsStyle="success"
 						className="margin-top-d15"
 						href={`/work/create?${_kebabCase(entity.type)}=${entity.bbid}`}
+						variant="success"
 					>
 						<FontAwesomeIcon className="margin-right-0-5" icon={faPlus}/>Add Work
 					</Button>
@@ -125,8 +125,8 @@ function WorkTable({entity, showAddedAtColumn, works, showAdd, showCheckboxes, s
 			<React.Fragment>
 				<span className="margin-right-2 pull-left">
 					<Button
-						bsStyle="success"
 						href={`/work/create?${_kebabCase(entity.type)}=${entity.bbid}`}
+						variant="success"
 					>
 						<FontAwesomeIcon icon={faPenNib} size="2x"/>
 						<br/>

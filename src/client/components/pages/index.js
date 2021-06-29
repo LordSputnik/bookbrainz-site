@@ -19,6 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+
 import * as bootstrap from 'react-bootstrap';
 
 import {faCircle, faCommentDots, faComments, faEnvelope, faListUl, faSearch, faUser} from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +31,7 @@ import RevisionsTable from './parts/revisions-table';
 import {faTwitter} from '@fortawesome/free-brands-svg-icons';
 
 
-const {Alert, Button, Col, Grid, Row} = bootstrap;
+const {Alert, Button, Col, Container, Form, FormControl, InputGroup, Row} = bootstrap;
 
 class IndexPage extends React.Component {
 	constructor(props) {
@@ -42,19 +43,17 @@ class IndexPage extends React.Component {
 	renderHeader() {
 		return (
 			<div>
-				<Alert bsStyle="warning" className="text-center">
-					<p>
-						Under development — adventurous users, please test and
-						add data! Give us feedback about bugs, glitches and
-						potential improvements at {' '}
-						<a href="//tickets.metabrainz.org/projects/BB">
-							MetaBrainz JIRA!
-						</a>
-					</p>
+				<Alert className="text-center" variant="warning">
+					Under development — adventurous users, please test and
+					add data! Give us feedback about bugs, glitches and
+					potential improvements at {' '}
+					<Alert.Link href="//tickets.metabrainz.org/projects/BB">
+						MetaBrainz JIRA!
+					</Alert.Link>
 				</Alert>
 				<div id="background-image">
 					<div className="text-center" id="background-overlay">
-						<Grid>
+						<Container>
 							<img
 								alt="BookBrainz logo"
 								className="img-responsive center-block"
@@ -62,33 +61,30 @@ class IndexPage extends React.Component {
 								title="BookBrainz"
 								width="500"
 							/>
-							<Row>
-								<Col md={8} mdOffset={2}>
-									<form action="/search" role="search">
-										<div className="input-group input-group-lg margin-top-5">
-											<input
+							<Row className="justify-content-center">
+								<Col md={8}>
+									<Form action="/search" role="search">
+										<InputGroup className="margin-top-5" size="lg">
+											<FormControl
 												autoFocus="autofocus"
-												className="form-control"
 												name="q"
 												placeholder="Search for..."
 												type="text"
 											/>
-											<span className="input-group-btn">
-												<Button
-													bsStyle="success"
-													type="submit"
-												>
+											<InputGroup.Append>
+												<Button type="submit" variant="success">
 													<FontAwesomeIcon icon={faSearch}/>
 												</Button>
-											</span>
-										</div>
-									</form>
+											</InputGroup.Append>
+										</InputGroup>
+									</Form>
 									<Row className="margin-top-4">
 										<Col sm={4}>
 											<Button
 												block
-												bsSize="large"
 												href="/about"
+												size="lg"
+												variant="secondary"
 											>
 												About
 											</Button>
@@ -96,8 +92,9 @@ class IndexPage extends React.Component {
 										<Col sm={4}>
 											<Button
 												block
-												bsSize="large"
 												href="/contribute"
+												size="lg"
+												variant="secondary"
 											>
 												Contribute
 											</Button>
@@ -105,8 +102,9 @@ class IndexPage extends React.Component {
 										<Col sm={4}>
 											<Button
 												block
-												bsSize="large"
 												href="/develop"
+												size="lg"
+												variant="secondary"
 											>
 												Develop
 											</Button>
@@ -116,12 +114,7 @@ class IndexPage extends React.Component {
 										<h4 className="contact-text">
 											Contact Us
 										</h4>
-										<div style={{
-											alignItems: 'center',
-											display: 'flex',
-											justifyContent: 'center'
-										}}
-										>
+										<div className="d-flex align-items-center justify-content-center">
 											<FontAwesomeIcon
 												className="margin-sides-1 contact-text"
 												icon={faCircle}
@@ -178,7 +171,7 @@ class IndexPage extends React.Component {
 									</div>
 								</Col>
 							</Row>
-						</Grid>
+						</Container>
 					</div>
 				</div>
 			</div>
@@ -187,10 +180,10 @@ class IndexPage extends React.Component {
 
 	renderContent() {
 		return (
-			<Grid>
-				<Row>
-					<Col md={8} mdOffset={2}>
-						<h1 className="text-center">The Open Book Database</h1>
+			<Container>
+				<Row className="justify-content-center">
+					<Col md={8}>
+						<h1 className="text-center mt-4">The Open Book Database</h1>
 						<p className="lead text-justify">
 							BookBrainz is a project to create an online database
 							of information about every single book, magazine,
@@ -213,15 +206,15 @@ class IndexPage extends React.Component {
 					/>
 					<div className="text-center">
 						<Button
-							bsStyle="primary"
 							href="/revisions"
+							variant="primary"
 						>
 							<FontAwesomeIcon className="margin-right-0-5" icon={faListUl}/>
 							See all revisions
 						</Button>
 					</div>
 				</div>
-			</Grid>
+			</Container>
 		);
 	}
 
@@ -251,9 +244,9 @@ class IndexPage extends React.Component {
 				<div className="text-center margin-top-1 margin-bottom-3">
 					<Button
 						{...disableSignUp}
-						bsSize="large"
-						bsStyle="success"
 						href="/register"
+						size="lg"
+						variant="success"
 					>
 				Register!
 					</Button>

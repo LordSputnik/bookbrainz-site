@@ -25,7 +25,7 @@ import {isFunction} from 'lodash';
 import request from 'superagent';
 
 
-const {Pager, Button, ButtonGroup, DropdownButton, MenuItem} = bootstrap;
+const {Button, ButtonGroup, Col, Dropdown, DropdownButton, Row} = bootstrap;
 
 class PagerElement extends React.Component {
 	constructor(props) {
@@ -134,43 +134,50 @@ class PagerElement extends React.Component {
 			<div id="PagerElement">
 				{
 					this.state.results && this.state.results.length ?
-						<div>
+						<Row className="pb-4">
 							<hr className="thin"/>
-							<Pager>
-								<Pager.Item
-									previous disabled={this.state.from <= 0}
-									href="#" onClick={this.handleClickPrevious}
+							<Col lg={4}>
+								<Button
+									className="round-button"
+									disabled={this.state.from <= 0}
+									variant="outline-primary"
+									onClick={this.handleClickPrevious}
 								>
 									&larr; Previous Page
-								</Pager.Item>
+								</Button>
+							</Col>
+							<Col className="text-center" lg={4}>
 								<ButtonGroup>
-									<Button disabled>Results {this.state.from + 1} —
+									<Button disabled variant="secondary">Results {this.state.from + 1} —
 										{this.state.results.length < this.state.size ?
 											this.state.from + this.state.results.length :
 											this.state.from + this.state.size
 										}
 									</Button>
 									<DropdownButton
-										dropup bsStyle="info" id="bg-nested-dropdown"
-										title={`${this.state.size} per page`}
+										drop="up" id="bg-nested-dropdown" title={`${this.state.size} per page`}
+										variant="info"
 										onSelect={this.handleResultsPerPageChange}
 									>
-										<MenuItem eventKey="10">10 per page</MenuItem>
-										<MenuItem eventKey="20">20 per page</MenuItem>
-										<MenuItem eventKey="35">35 per page</MenuItem>
-										<MenuItem eventKey="50">50 per page</MenuItem>
-										<MenuItem eventKey="100">100 per page</MenuItem>
+										<Dropdown.Item eventKey="10">10 per page</Dropdown.Item>
+										<Dropdown.Item eventKey="20">20 per page</Dropdown.Item>
+										<Dropdown.Item eventKey="35">35 per page</Dropdown.Item>
+										<Dropdown.Item eventKey="50">50 per page</Dropdown.Item>
+										<Dropdown.Item eventKey="100">100 per page</Dropdown.Item>
 									</DropdownButton>
 								</ButtonGroup>
-								<Pager.Item
-									next disabled={!this.state.nextEnabled}
-									href="#" onClick={this.handleClickNext}
-								>
-									Next Page &rarr;
-								</Pager.Item>
-							</Pager>
-
-						</div> :
+								</Col>
+							<Col className="text-right" lg={4}>
+							<Button
+								className="round-button"
+								disabled={!this.state.nextEnabled}
+								variant="outline-primary"
+								onClick={this.handleClickNext}
+							>
+								Next Page &rarr;
+							</Button>
+							</Col>
+						</Row> :
 						null
 				}
 			</div>

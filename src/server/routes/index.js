@@ -56,9 +56,11 @@ router.get('/', async (req, res, next) => {
 		 * file object spread injects the app.locals variables into React as
 		 * props
 		 */
+		console.log(Layout);
 		const markup = ReactDOMServer.renderToString(
 			<Layout	{...propHelpers.extractLayoutProps(props)}>
-				<Index {...propHelpers.extractChildProps(props)}/>
+				<div>Hi!</div>
+				{/* <Index {...propHelpers.extractChildProps(props)}/> */}
 			</Layout>
 		);
 

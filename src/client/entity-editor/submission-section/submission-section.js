@@ -82,15 +82,15 @@ function SubmissionSection({
 			</Row>
 			<div className="text-center margin-top-1">
 				<Button
-					bsStyle="success"
 					disabled={!formValid || submitted}
 					type="submit"
+					variant="success"
 				>
 					Submit
 				</Button>
 			</div>
 			<div className={errorAlertClass}>
-				<Alert bsStyle="danger">Submission Error: {errorText}</Alert>
+				<Alert variant="danger">Submission Error: {errorText}</Alert>
 			</div>
 		</div>
 	);

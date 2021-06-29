@@ -31,7 +31,7 @@ import React from 'react';
 import 'chartjs-adapter-date-fns';
 
 
-const {Button, Col, Image, Row} = bootstrap;
+const {Button, Card, Col, ListGroup, Image, Row} = bootstrap;
 const {formatDate} = utilsHelper;
 
 class EditorProfileTab extends React.Component {
@@ -82,43 +82,47 @@ class EditorProfileTab extends React.Component {
 
 		return (
 			<div>
-				<h2>
-					Basic Info
+				<div className="d-flex pt-3">
+					<h2>
+						Basic Info
+					</h2>
 					{user && user.id === editor.id &&
-						<small className="pull-right">
+						<div className="ml-auto">
 							<Button
-								bsStyle="warning"
 								className="entity-action"
 								href="/editor/edit"
 								title="Edit basic editor info"
+								variant="warning"
 							>
 								<FontAwesomeIcon icon={faPencilAlt}/>{' '}Edit Profile
 							</Button>
-						</small>
+						</div>
 					}
-				</h2>
-				<dl className="dl-horizontal">
-					<dt>MusicBrainz Account</dt>
-					<dd>
-						{musicbrainzAccount}
-					</dd>
-					<dt>Display Name</dt>
-					<dd>{name}</dd>
-					<dt>Area</dt>
-					<dd>{editor.area ? editor.area.name : '?'}</dd>
-					<dt>Gender</dt>
-					<dd>{gender ? gender.name : '?'}</dd>
-					<dt>Type</dt>
-					<dd>{editor.type.label}</dd>
-					<dt>Reputation</dt>
-					<dd>0</dd>
-					<dt>Joined</dt>
-					<dd>{createdAtDate}</dd>
-					<dt>Last login</dt>
-					<dd>{lastActiveDate}</dd>
-					<dt>Bio</dt>
-					<dd>{editor.bio ? editor.bio : '-'}</dd>
-				</dl>
+				</div>
+				<div>
+					<dl className="row">
+						<dt className="col-md-2 text-right">MusicBrainz Account</dt>
+						<dd className="col-md-10">
+							{musicbrainzAccount}
+						</dd>
+						<dt className="col-md-2 text-right">Display Name</dt>
+						<dd className="col-md-10">{name}</dd>
+						<dt className="col-md-2 text-right">Area</dt>
+						<dd className="col-md-10">{editor.area ? editor.area.name : '?'}</dd>
+						<dt className="col-md-2 text-right">Gender</dt>
+						<dd className="col-md-10">{gender ? gender.name : '?'}</dd>
+						<dt className="col-md-2 text-right">Type</dt>
+						<dd className="col-md-10">{editor.type.label}</dd>
+						<dt className="col-md-2 text-right">Reputation</dt>
+						<dd className="col-md-10">0</dd>
+						<dt className="col-md-2 text-right">Joined</dt>
+						<dd className="col-md-10">{createdAtDate}</dd>
+						<dt className="col-md-2 text-right">Last login</dt>
+						<dd className="col-md-10">{lastActiveDate}</dd>
+						<dt className="col-md-2 text-right">Bio</dt>
+						<dd className="col-md-10">{editor.bio ? editor.bio : '-'}</dd>
+					</dl>
+				</div>
 			</div>
 		);
 	}
@@ -129,13 +133,13 @@ class EditorProfileTab extends React.Component {
 		return (
 			<div>
 				<h2>Stats</h2>
-				<dl className="dl-horizontal">
-					<dt>Total Revisions</dt>
-					<dd>{editor.totalRevisions}</dd>
-					<dt>Revisions Applied</dt>
-					<dd>{editor.revisionsApplied}</dd>
-					<dt>Revisions Reverted</dt>
-					<dd>{editor.revisionsReverted}</dd>
+				<dl className="row">
+					<dt className="col-md-8 text-right">Total Revisions</dt>
+					<dd className="col-md-4">{editor.totalRevisions}</dd>
+					<dt className="col-md-8 text-right">Revisions Applied</dt>
+					<dd className="col-md-4">{editor.revisionsApplied}</dd>
+					<dt className="col-md-8 text-right">Revisions Reverted</dt>
+					<dd className="col-md-4">{editor.revisionsReverted}</dd>
 				</dl>
 			</div>
 		);
@@ -161,24 +165,25 @@ class EditorProfileTab extends React.Component {
 				>
 					{achievement.model.map((model) => (
 						<Col key={`achievementModel${model.id}`} sm={4}>
-							<div className="well">
-								<Image
-									className="center-block"
-									height="100px"
+							<Card bg="light">
+								<Card.Img
+									className="mt-4"
+									height={100}
 									src={model.achievement.badgeUrl}
+									variant="top"
 								/>
-								<p className="text-center">
-									{model.achievement.name}
-								</p>
-								<p className="text-center">
-									{model.achievement.description}
-								</p>
-								<p className="text-center">
-									{`unlocked: ${formatDate(new Date(
-										model.unlockedAt
-									), true)}`}
-								</p>
-							</div>
+								<Card.Body className="text-center">
+									<ListGroup variant="flush">
+										<ListGroup.Item>{model.achievement.name}</ListGroup.Item>
+										<ListGroup.Item>{model.achievement.description}</ListGroup.Item>
+										<ListGroup.Item>
+											{`Unlocked: ${formatDate(new Date(
+												model.unlockedAt
+											), true)}`}
+										</ListGroup.Item>
+									</ListGroup>
+								</Card.Body>
+							</Card>
 						</Col>
 					))}
 					{achievement.length < 3 &&

@@ -24,7 +24,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 
-const {Col, Nav, NavItem, Row} = bootstrap;
+const {Col, Nav, Row} = bootstrap;
 
 function EditorContainer(props) {
 	const {tabActive, editor, children} = props;
@@ -44,7 +44,7 @@ function EditorContainer(props) {
 								</h1>
 							</a>
 						</div> :
-						<h1>
+						<h1 className="mt-4">
 							{editor.name}
 						</h1>
 					}
@@ -52,31 +52,39 @@ function EditorContainer(props) {
 			</Row>
 			<Row>
 				<Col md={12}>
-					<Nav bsStyle="tabs">
-						<NavItem
-							active={tabActive === 0}
-							href={`/editor/${editor.id}`}
-						>
-							Profile
-						</NavItem>
-						<NavItem
-							active={tabActive === 1}
-							href={`/editor/${editor.id}/revisions`}
-						>
-							Revisions
-						</NavItem>
-						<NavItem
-							active={tabActive === 2}
-							href={`/editor/${editor.id}/achievements`}
-						>
-							Achievements
-						</NavItem>
-						<NavItem
-							active={tabActive === 3}
-							href={`/editor/${editor.id}/collections`}
-						>
-							Collections
-						</NavItem>
+					<Nav variant="tabs">
+						<Nav.Item>
+							<Nav.Link
+								active={tabActive === 0}
+								href={`/editor/${editor.id}`}
+							>
+								Profile
+							</Nav.Link>
+						</Nav.Item>
+						<Nav.Item>
+							<Nav.Link
+								active={tabActive === 1}
+								href={`/editor/${editor.id}/revisions`}
+							>
+								Revisions
+							</Nav.Link>
+						</Nav.Item>
+						<Nav.Item>
+							<Nav.Link
+								active={tabActive === 2}
+								href={`/editor/${editor.id}/achievements`}
+							>
+								Achievements
+							</Nav.Link>
+						</Nav.Item>
+						<Nav.Item>
+							<Nav.Link
+								active={tabActive === 3}
+								href={`/editor/${editor.id}/collections`}
+							>
+								Collections
+							</Nav.Link>
+						</Nav.Item>
 					</Nav>
 				</Col>
 			</Row>

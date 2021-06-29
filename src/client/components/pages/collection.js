@@ -225,7 +225,7 @@ class CollectionPage extends React.Component {
 	}
 
 	render() {
-		const messageComponent = this.state.message.text ? <Alert bsStyle={this.state.message.type} className="margin-top-1" onDismiss={this.handleAlertDismiss}>{this.state.message.text}</Alert> : null;
+		const messageComponent = this.state.message.text ? <Alert className="margin-top-1" variant={this.state.message.type} onDismiss={this.handleAlertDismiss}>{this.state.message.text}</Alert> : null;
 		const EntityTable = getEntityTable(this.props.collection.entityType);
 		const propsForTable = {
 			[this.entityKey]: this.state.entities,
@@ -269,9 +269,9 @@ class CollectionPage extends React.Component {
 						this.props.isCollaborator || this.props.isOwner ?
 							<Button
 								bsSize="small"
-								bsStyle="success"
 								className="margin-bottom-d5"
 								title={`Add ${this.props.collection.entityType}`}
+								variant="success"
 								onClick={this.handleShowAddEntityModal}
 							>
 								<FontAwesomeIcon icon={faPlus}/>
@@ -282,10 +282,10 @@ class CollectionPage extends React.Component {
 						(this.props.isCollaborator || this.props.isOwner) && this.state.entities.length ?
 							<Button
 								bsSize="small"
-								bsStyle="danger"
 								className="margin-bottom-d5"
 								disabled={!this.state.selectedEntities.length}
 								title={`Remove selected ${_.kebabCase(this.props.collection.entityType)}s`}
+								variant="danger"
 								onClick={this.handleRemoveEntities}
 							>
 								<FontAwesomeIcon icon={faTimesCircle}/>
@@ -297,10 +297,10 @@ class CollectionPage extends React.Component {
 						this.props.isOwner ?
 							<Button
 								bsSize="small"
-								bsStyle="warning"
 								className="margin-bottom-d5"
 								href={`/collection/${this.props.collection.id}/edit`}
 								title="Edit Collection"
+								variant="warning"
 							>
 								<FontAwesomeIcon icon={faPencilAlt}/>&nbsp;Edit collection
 							</Button> : null
@@ -309,9 +309,9 @@ class CollectionPage extends React.Component {
 						this.props.isOwner ?
 							<Button
 								bsSize="small"
-								bsStyle="danger"
 								className="margin-bottom-d5"
 								title="Delete Collection"
+								variant="danger"
 								onClick={this.handleShowDeleteModal}
 							>
 								<FontAwesomeIcon icon={faTrashAlt}/>&nbsp;Delete collection
@@ -321,9 +321,9 @@ class CollectionPage extends React.Component {
 						this.props.isCollaborator ?
 							<Button
 								bsSize="small"
-								bsStyle="warning"
 								className="margin-bottom-d5"
 								title="Remove yourself as a collaborator"
+								variant="warning"
 								onClick={this.handleShowDeleteModal}
 							>
 								<FontAwesomeIcon icon={faTimesCircle}/>&nbsp;Stop collaboration

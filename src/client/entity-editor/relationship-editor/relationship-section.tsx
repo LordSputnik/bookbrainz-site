@@ -82,9 +82,9 @@ export function RelationshipList(
 						<ButtonGroup justified>
 							{onEdit &&
 								<Button
-									bsStyle="warning"
 									href="#"
 									role="button"
+									variant="warning"
 									onClick={onEdit.bind(this, rowID)}
 								>
 									<FontAwesomeIcon icon={faPencilAlt}/>
@@ -93,9 +93,9 @@ export function RelationshipList(
 							}
 							{onRemove &&
 								<Button
-									bsStyle="danger"
 									href="#"
 									role="button"
+									variant="danger"
 									onClick={onRemove.bind(this, rowID)}
 								>
 									<FontAwesomeIcon icon={faTimes}/>
@@ -213,7 +213,7 @@ function RelationshipSection({
 						mdOffset={4}
 					>
 						<Button
-							bsStyle="success"
+							variant="success"
 							onClick={onAddRelationship}
 						>
 							<FontAwesomeIcon icon={faPlus}/>

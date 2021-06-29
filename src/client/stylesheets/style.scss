@@ -1,0 +1,237 @@
+/*
+ * Copyright (C) 2014-2015, 2021  Ben Ockmore
+ *               2015             Leo Verto
+ *               2016             Sean Burke
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+ // might not work - be prepared to write a custom workaround just for buttons
+$primary: #428bca;
+
+@import "lobes/scss/variables.scss";
+
+$brand-secondary: $bookbrainz;
+$disabled-bg: lighten(desaturate($bookbrainz,10%),42%);
+$disabled-color: lighten($disabled-bg,15%);
+
+
+@import "lobes/scss/bootstrap.scss";
+
+
+
+.navbar.BookBrainz {
+	background: rgba(255, 255, 255, 1);
+	margin-bottom: 0px;
+	.navbar-nav > .disabled > a {
+		color: $disabled-color;
+		background: $disabled-bg;
+	}
+}
+
+.navbar-collapse {
+	border: none !important;
+}
+
+.BookBrainz .navbar-toggler {
+	background-color: $bookbrainz;
+	&:focus {
+		background-color: $bookbrainz;
+	}
+}
+
+
+#background-image {
+	background:url(./Bookshelf.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width:100%;
+	height:550px;
+}
+
+#background-overlay {
+	background:rgba(0, 0, 0, 0.8);
+	width:100%;
+	height:100%;
+	padding-top:4em;
+}
+
+// .deleted {
+// 	text-decoration: line-through;
+// 	color: $brand-danger;
+// }
+
+.footer {
+	position: absolute;
+	width: 100%;
+	background-color: #f5f5f5;
+    bottom: 0;
+}
+
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin-top: 64px;
+    margin-bottom: 64px;
+}
+
+@mixin generate-margins($n, $initI: 0) {
+	@for $i from $initI through $n {
+		.margin-top-#{$i} {
+			margin-top: ($i * 1em) !important;
+		}
+		.margin-bottom-#{$i} {
+			margin-bottom: ($i * 1em) !important;
+		}
+		.margin-left-#{$i} {
+			margin-left: ($i * 1em) !important;
+		}
+		.margin-right-#{$i} {
+			margin-right: ($i * 1em) !important;
+		}
+		.margin-sides-#{$i} {
+			margin-left: ($i * 1em) !important;
+			margin-right: ($i * 1em) !important;
+		}
+
+		.padding-top-#{$i} {
+			padding-top: ($i * 1em) !important;
+		}
+		.padding-bottom-#{$i} {
+			padding-bottom: ($i * 1em) !important;
+		}
+		.padding-left-#{$i} {
+			padding-left: ($i * 1em) !important;
+		}
+		.padding-right-#{$i} {
+			padding-right: ($i * 1em) !important;
+		}
+		.padding-sides-#{$i} {
+			padding-left: ($i * 1em) !important;
+			padding-right: ($i * 1em) !important;
+		}
+	}
+}
+@include generate-margins(6);
+.margin-right-0-5 {margin-right: 0.5em !important};
+.margin-left-0-5 {margin-left: 0.5em !important};
+.margin-right-0-3 {margin-right: 0.3em !important};
+.margin-left-0-3 {margin-left: 0.3em !important};
+
+@mixin generate-margins-d($n, $initI: 0) {
+	@for $i from $initI through $n {
+		.margin-top-d#{$i} {
+			margin-top: ($i * 0.1em) !important;
+		}
+		.margin-bottom-d#{$i} {
+			margin-bottom: ($i * 0.1em) !important;
+		}
+		.margin-left-d#{$i} {
+			margin-left: ($i * 0.1em) !important;
+		}
+		.margin-right-d#{$i} {
+			margin-right: ($i * 0.1em) !important;
+		}
+		.margin-sides-d#{$i} {
+			margin-left: ($i * 0.1em) !important;
+			margin-right: ($i * 0.1em) !important;
+		}
+
+		.padding-top-d#{$i} {
+			padding-top: ($i * 0.1em) !important;
+		}
+		.padding-bottom-d#{$i} {
+			padding-bottom: ($i * 0.1em) !important;
+		}
+		.padding-left-d#{$i} {
+			padding-left: ($i * 0.1em) !important;
+		}
+		.padding-right-d#{$i} {
+			padding-right: ($i * 0.1em) !important;
+		}
+		.padding-sides-d#{$i} {
+			padding-left: ($i * 0.1em) !important;
+			padding-right: ($i * 0.1em) !important;
+		}
+	}
+}
+@include generate-margins-d(60);
+
+.contact-text {
+	color: rgb(180, 180, 180);
+	flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+a.contact-text:visited {
+	color: rgb(180, 180, 180);
+}
+
+
+.BookBrainz > .container-fluid > .navbar-header {
+	margin-left: 0px;
+	margin-right: 0px;
+	>.navbar-toggler {
+		margin-right: 0px;
+	}
+}
+
+.revision-note {
+	&:not(:last-child) {
+		border-bottom: 1px solid $disabled-color;
+		margin-bottom: 0.3em;
+		padding-bottom: 0.3em;
+	}
+	.note-content {
+		white-space: pre-wrap;
+	}
+	.note-author {
+		@extend .small;
+		font-style: italic;
+		white-space: nowrap;
+		margin-left: 0.2em;
+	}
+}
+
+.list-group-item {
+	word-wrap: break-word;
+}
+
+.list-group ul {
+	margin-bottom: 0;
+}
+
+ul {
+	margin-bottom: 10px;
+}
+
+dl.row dd {
+	margin-bottom: 0;
+}
+
+.card.bg-light .list-group-item {
+	background-color: $gray-200;
+}
+
+.round-button {
+	border-radius: 20px;
+	font-weight: 700;
+}

@@ -19,11 +19,15 @@
 import * as bootstrap from 'react-bootstrap';
 import * as utilsHelper from '../../../helpers/utils';
 import {genEntityIconHTMLElement, getEntityLabel, getEntityUrl} from '../../../helpers/entity';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {faCodeBranch} from '@fortawesome/free-solid-svg-icons';
 
+
+function FontAwesomeIcon() {
+	return null;
+}
 
 const {Table} = bootstrap;
 const {formatDate, stringToHTMLWithLinks} = utilsHelper;
@@ -31,10 +35,8 @@ const {formatDate, stringToHTMLWithLinks} = utilsHelper;
 
 function RevisionsTable(props) {
 	const {results, showEntities, showRevisionNote, showRevisionEditor, tableHeading} = props;
-	const tableCssClasses = 'table table-striped';
 	return (
-
-		<div>
+		<div className="mt-4">
 			<div>
 				<h1 className="text-center">{tableHeading}</h1>
 			</div>
@@ -43,24 +45,25 @@ function RevisionsTable(props) {
 				results.length > 0 ?
 					<Table
 						responsive
-						className={tableCssClasses}
+						striped
+						className="table-borderless"
 					>
 						<thead>
 							<tr>
-								<th className="col-sm-2">Revision ID</th>
+								<th className="col-md-2">Revision ID</th>
 								{
 									showEntities ?
-										<th className="col-sm-5">Modified entities</th> : null
+										<th className="col-md-5">Modified entities</th> : null
 								}
 								{
 									showRevisionEditor ?
-										<th className="col-sm-3">User</th> : null
+										<th className="col-md-3">User</th> : null
 								}
 								{
 									showRevisionNote ?
-										<th className="col-sm-3">Note</th> : null
+										<th className="col-md-3">Note</th> : null
 								}
-								<th className="col-sm-2">Date</th>
+								<th className="col-md-2">Date</th>
 							</tr>
 						</thead>
 
